@@ -15,7 +15,7 @@ def to_binary_manual(number):
     return "".join(binary_digits)
 
 
-def arithmetic_to_boolean(a1, d, n):
+def arithmetic_to_boolean(a1, n, d):
     """
     Converts an arithmetic sequence into its Boolean (binary) form
     using the formula: Kn = (Sn * 23) / 46
