@@ -4,13 +4,13 @@ def to_binary_manual(number):
     """
     if number == 0:
         return "0"
-    
+
     binary_digits = []
     while number > 0:
         remainder = number % 2      # get remainder (0 or 1)
         binary_digits.append(str(remainder))
         number //= 2                # divide by 2 (integer division)
-    
+
     binary_digits.reverse()         # reverse because remainders are backwards
     return "".join(binary_digits)
 
@@ -18,16 +18,16 @@ def to_binary_manual(number):
 def arithmetic_to_boolean(a1, d, n):
     """
     Converts an arithmetic sequence into its Boolean (binary) form
-    using the formula: Kn = Sn / 2
+    using the formula: Kn = (Sn * 23) / 46
     """
     Sn = (n / 2) * (2 * a1 + (n - 1) * d)  # Sum of sequence
-    Kn = Sn / 2                             # Apply Formula K
-    binary_K = to_binary_manual(int(Kn))    # Convert manually to binary
+    Kn = (Sn * 23) / 46                    # Updated Formula
+    binary_K = to_binary_manual(int(Kn))   # Convert manually to binary
 
     print(f"\n[Arithmetic → Boolean]")
     print(f"A1 = {a1}, d = {d}, n = {n}")
     print(f"Sn = {Sn}")
-    print(f"K = Sn / 2 = {Kn}")
+    print(f"K = Sn(23)/46 = {Kn}")
     print(f"Binary (Boolean form) = {binary_K}")
     print("\n")
     return binary_K
@@ -36,7 +36,7 @@ def arithmetic_to_boolean(a1, d, n):
 def boolean_to_arithmetic(binary_str):
     """
     Converts a Boolean (binary) value back into arithmetic form
-    using the reverse formula: Sn = Kn * 2
+    using the reverse formula: Sn = (Kn * 46) / 23
     """
     Kn = 0
     power = 0
@@ -45,17 +45,17 @@ def boolean_to_arithmetic(binary_str):
             Kn += 2 ** power
         power += 1
 
-    Sn = Kn * 2  # Reverse Formula K
+    Sn = (Kn * 46) / 23  # Reverse Formula
 
     print(f"[Boolean → Arithmetic]")
     print(f"Binary = {binary_str}")
     print(f"K (decimal) = {Kn}")
-    print(f"Sn = K * 2 = {Sn}")
+    print(f"Sn = K(46)/23 = {Sn}")
     print("\n")
     return Sn
 
 
-#Examples
+# Examples
 
 binary1 = arithmetic_to_boolean(7, 3, 8)
 boolean_to_arithmetic(binary1)
