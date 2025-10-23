@@ -63,7 +63,7 @@ binary1 = arithmetic_to_boolean(7, 3, 8)
 boolean_to_arithmetic(binary1)
 print("-" * 20)
 
-binary2 = arithmetic_to_boolean(6, 5, 6)
+binary2 = arithmetic_to_boolean(6, 2, 5)
 boolean_to_arithmetic(binary2)
 print("-" * 20)
 
@@ -71,10 +71,10 @@ binary3 = arithmetic_to_boolean(5, 7, 4)
 boolean_to_arithmetic(binary3)
 print("-" * 20)
 
-binary4 = arithmetic_to_boolean(4, 11, 6)
+binary4 = arithmetic_to_boolean(7, 11, 6)
 boolean_to_arithmetic(binary4)
 print("-" * 20)
 
-binary5 = arithmetic_to_boolean(5, 15, 5)
+binary5 = arithmetic_to_boolean(9, 8, 5)
 boolean_to_arithmetic(binary5)
 print("-" * 20)
