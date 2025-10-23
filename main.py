@@ -18,45 +18,47 @@ def to_binary_manual(number):
 def arithmetic_to_boolean(a1, n, d):
     """
     Converts an arithmetic sequence into its Boolean (binary) form
-    using the formula: Kn = (Sn * 23) / 46
+    using the formula: Kn = Sn / 2  (scaled version)
+    To keep decimals accurate, we multiply both sides by 2 so we store 2*Kn as integer.
     """
     Sn = (n / 2) * (2 * a1 + (n - 1) * d)  # Sum of sequence
-    Kn = (Sn * 23) / 46                    # Updated Formula
-    binary_K = to_binary_manual(int(Kn))   # Convert manually to binary
+    Kn = Sn / 2                            # Main formula
+    scaled_K = Kn * 2                      # Scale to keep .5 accuracy
+    binary_K = to_binary_manual(int(round(scaled_K)))  # Convert scaled value to binary
 
     print(f"\n[Arithmetic → Boolean]")
     print(f"A1 = {a1}, d = {d}, n = {n}")
     print(f"Sn = {Sn}")
-    print(f"K = Sn(23)/46 = {Kn}")
-    print(f"Binary (Boolean form) = {binary_K}")
-    print("\n")
+    print(f"K = Sn/2 = {Kn}")
+    print(f"Scaled (2*Kn) = {scaled_K}")
+    print(f"Binary (Boolean form) = {binary_K}\n")
     return binary_K
 
 
 def boolean_to_arithmetic(binary_str):
     """
     Converts a Boolean (binary) value back into arithmetic form
-    using the reverse formula: Sn = (Kn * 46) / 23
+    using the reverse of the scaled method: Sn = (scaled_value / 2) * 2
     """
-    Kn = 0
+    scaled_value = 0
     power = 0
     for bit in reversed(binary_str):
         if bit == '1':
-            Kn += 2 ** power
+            scaled_value += 2 ** power
         power += 1
 
-    Sn = (Kn * 46) / 23  # Reverse Formula
+    Kn = scaled_value / 2  # undo scaling
+    Sn = Kn * 2            # reverse formula Sn = Kn * 2
 
     print(f"[Boolean → Arithmetic]")
     print(f"Binary = {binary_str}")
-    print(f"K (decimal) = {Kn}")
-    print(f"Sn = K(46)/23 = {Sn}")
-    print("\n")
+    print(f"Scaled value = {scaled_value}")
+    print(f"Kn (decimal) = {Kn}")
+    print(f"Sn = {Sn}\n")
     return Sn
 
 
 # Examples
-
 binary1 = arithmetic_to_boolean(7, 3, 8)
 boolean_to_arithmetic(binary1)
 print("-" * 20)
