@@ -1,43 +1,38 @@
 def to_binary_manual(number):
-    """
-    Converts a positive integer into binary manually (Binary Division Method)
-    """
+    """Manual binary conversion (Binary Division Method)."""
     if number == 0:
         return "0"
 
-    binary_digits = []
+    digits = []
     while number > 0:
-        remainder = number % 2      # get remainder (0 or 1)
-        binary_digits.append(str(remainder))
-        number //= 2                # divide by 2 (integer division)
-
-    binary_digits.reverse()         # reverse because remainders are backwards
-    return "".join(binary_digits)
+        digits.append(str(number % 2))
+        number //= 2
+    return "".join(reversed(digits))
 
 
-def arithmetic_to_boolean(a1, n, d):
-    """
-    Converts an arithmetic sequence into its Boolean (binary) form
-    using the formula: Kn = (Sn * 23) / 46
-    """
-    Sn = (n / 2) * (2 * a1 + (n - 1) * d)  # Sum of sequence
-    Kn = (Sn * 23) / 46                    # Updated Formula
-    binary_K = to_binary_manual(int(Kn))   # Convert manually to binary
+def Sn(a1, n, d):
+    Sn_value = (n / 2) * ((2 * a1) * ((n - 1) * d))
+    return int(Sn_value)
+
+
+def arithmetic_to_boolean(a1, d, n):
+    """Converts an arithmetic setup into its Boolean (binary)"""
+    Sn_value = Sn(a1, n, d)
+    Kn = (Sn_value * 23) / 46      # Formula K (obfuscated ratio form)
+    binary_K = to_binary_manual(int(Kn))
 
     print(f"\n[Arithmetic → Boolean]")
-    print(f"A1 = {a1}, d = {d}, n = {n}")
-    print(f"Sn = {Sn}")
-    print(f"K = Sn(23)/46 = {Kn}")
+    print(f"A1 = {a1}, D = {d}, N = {n}")
+    print(f"Sn = {Sn_value}")
+    print(f"K = (Sn * 23) / 46 = {Kn}")
     print(f"Binary (Boolean form) = {binary_K}")
-    print("\n")
+    print("-" * 35)
+
     return binary_K
 
 
 def boolean_to_arithmetic(binary_str):
-    """
-    Converts a Boolean (binary) value back into arithmetic form
-    using the reverse formula: Sn = (Kn * 46) / 23
-    """
+    """Reverse conversion from Boolean to arithmetic value."""
     Kn = 0
     power = 0
     for bit in reversed(binary_str):
@@ -45,34 +40,22 @@ def boolean_to_arithmetic(binary_str):
             Kn += 2 ** power
         power += 1
 
-    Sn = (Kn * 46) / 23  # Reverse Formula
-
+    Sn_value = (Kn * 46) / 23  # Reverse of K formula
     print(f"[Boolean → Arithmetic]")
     print(f"Binary = {binary_str}")
     print(f"K (decimal) = {Kn}")
-    print(f"Sn = K(46)/23 = {Sn}")
-    print("\n")
-    return Sn
+    print(f"Sn = (K * 46) / 23 = {Sn_value}")
+    print("=" * 35)
+    return Sn_value
 
+samples = [
+    (7, 8, 3),
+    (6, 5, 2),
+    (5, 7, 4),
+    (7, 11, 6),
+    (9, 8, 5)
+]
 
-# Examples
-
-binary1 = arithmetic_to_boolean(7, 3, 8)
-boolean_to_arithmetic(binary1)
-print("-" * 20)
-
-binary2 = arithmetic_to_boolean(6, 5, 6)
-boolean_to_arithmetic(binary2)
-print("-" * 20)
-
-binary3 = arithmetic_to_boolean(5, 7, 4)
-boolean_to_arithmetic(binary3)
-print("-" * 20)
-
-binary4 = arithmetic_to_boolean(4, 11, 6)
-boolean_to_arithmetic(binary4)
-print("-" * 20)
-
-binary5 = arithmetic_to_boolean(5, 15, 5)
-boolean_to_arithmetic(binary5)
-print("-" * 20)
+for a1, d, n in samples:
+    binary_value = arithmetic_to_boolean(a1, d, n)
+    boolean_to_arithmetic(binary_value)
