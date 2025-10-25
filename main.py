@@ -58,6 +58,8 @@ def boolean_to_arithmetic(binary_str):
     return Sn
 
 
+# print(to_binary_manual(23))
+
 # Examples
 binary1 = arithmetic_to_boolean(7, 3, 8)
 boolean_to_arithmetic(binary1)
